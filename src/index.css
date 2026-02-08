@@ -149,6 +149,8 @@ input::placeholder {
   max-width: 900px;
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* === CARDS === */
@@ -611,6 +613,50 @@ input::placeholder {
     gap: 1rem;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Reorder elements on mobile */
+  .container > :nth-child(1) {
+    order: 1; /* SearchBar */
+  }
+
+  .container > .forecast {
+    order: 2;
+  }
+
+  .container > .settings {
+    order: 3;
+    max-width: 60%;
+    margin: 1rem auto;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .container > .settings button {
+    width: 100%;
+    flex: 1 1 calc(50% - 0.25rem);
+    padding: 0.65rem;
+    font-size: 0.75rem;
+    min-height: 44px;
+  }
+
+  .container > .saved-cities {
+    order: 4;
+  }
+
+  .container > .weather {
+    order: 5;
+  }
+
+  .container > .error,
+  .container > .loading {
+    order: 6;
+  }
+
   h1 {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
@@ -736,12 +782,7 @@ input::placeholder {
     margin: 1rem 0;
   }
 
-  .settings button {
-    width: 100%;
-    padding: 0.65rem;
-    font-size: 0.75rem;
-    min-height: 44px;
-  }
+  /* No need - handled by .container > .settings button above */
 
   .saved-cities {
     margin: 1rem 0;
