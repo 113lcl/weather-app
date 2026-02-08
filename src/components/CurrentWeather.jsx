@@ -44,7 +44,7 @@ function CurrentWeather({ weather, units }) {
             </div>
             <div className="detail-item">
               <span>UV Index:</span>
-              <span>N/A</span>
+              <span>{Math.round(weather.uv_index || 0)}</span>
             </div>
           </div>
         </div>

@@ -38,7 +38,7 @@ export const weatherAPI = {
       
       const tempUnit = units === 'metric' ? 'celsius' : 'fahrenheit';
       const response = await fetch(
-        `${BASE_URL}/forecast?latitude=${location.lat}&longitude=${location.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,visibility,surface_pressure&timezone=${location.timezone}&temperature_unit=${tempUnit}`
+        `${BASE_URL}/forecast?latitude=${location.lat}&longitude=${location.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,visibility,surface_pressure,uv_index&timezone=${location.timezone}&temperature_unit=${tempUnit}`
       );
       
       if (!response.ok) {
@@ -68,6 +68,7 @@ export const weatherAPI = {
           speed: data.current.wind_speed_10m
         },
         visibility: data.current.visibility || 10000,
+        uv_index: data.current.uv_index || 0,
         timezone: location.timezone
       };
     } catch (error) {
@@ -128,7 +129,7 @@ export const weatherAPI = {
     try {
       const tempUnit = units === 'metric' ? 'celsius' : 'fahrenheit';
       const response = await fetch(
-        `${BASE_URL}/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,visibility,surface_pressure&temperature_unit=${tempUnit}`
+        `${BASE_URL}/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,visibility,surface_pressure,uv_index&temperature_unit=${tempUnit}`
       );
       
       if (!response.ok) {
@@ -178,7 +179,8 @@ export const weatherAPI = {
         wind: {
           speed: data.current.wind_speed_10m
         },
-        visibility: data.current.visibility || 10000
+        visibility: data.current.visibility || 10000,
+        uv_index: data.current.uv_index || 0
       };
     } catch (error) {
       console.error('getWeatherByCoords error:', error);
