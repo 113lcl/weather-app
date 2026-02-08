@@ -634,11 +634,11 @@ input::placeholder {
 
   /* Reorder elements on mobile */
   .container > :nth-child(1) {
-    order: 2; /* SearchBar */
+    order: 1; /* SearchBar */
   }
 
   .container > .weather {
-    order: 1;
+    order: 2;
   }
 
   .container > .forecast {

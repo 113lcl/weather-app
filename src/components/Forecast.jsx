@@ -1,6 +1,18 @@
 import { getWeatherEmoji, formatDay } from '../utils/weatherAPI';
+import { useState, useEffect } from 'react';
 
 function Forecast({ forecast, units }) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   if (!forecast || !forecast.list) return null;
 
   // Get unique days (one forecast per day at 12:00)
@@ -14,15 +26,16 @@ function Forecast({ forecast, units }) {
     }
   });
 
+  const daysToShow = isMobile ? 4 : 5;
   const uniqueDays = Object.entries(dailyForecasts)
-    .slice(0, 5)
+    .slice(0, daysToShow)
     .map(([_, data]) => data);
 
   const tempUnit = units === 'metric' ? '°C' : '°F';
 
   return (
     <div className="forecast">
-      <h3>📅 5-DAY FORECAST</h3>
+      <h3>📅 {daysToShow}-DAY FORECAST</h3>
       <div className="forecast-grid">
         {uniqueDays.map((day, index) => (
           <div key={index} className="forecast-card">
