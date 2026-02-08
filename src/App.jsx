@@ -8,7 +8,7 @@ import { weatherAPI } from './utils/weatherAPI';
 import './index.css';
 
 function App() {
-  const [city, setCity] = useState('London');
+  const [city, setCity] = useState('New York');
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
